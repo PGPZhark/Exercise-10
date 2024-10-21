@@ -1,5 +1,5 @@
-document.getElementById("btn").addEventListener("click", getApi);
-
+document.getElementById("swapibtn").addEventListener("click", getApi);
+document.getElementById("deckbtn").addEventListener("click", getApiDeck);
 
 function getApi()
 {
@@ -26,6 +26,27 @@ function getApi()
             console.log(s);
 
             document.getElementById("output").value = s;
+
+        }
+        )
+        .catch(err => console.log(err))
+}
+
+function getApiDeck()
+{
+    let fullUri = "https://deckofcardsapi.com/api/deck/new/draw/?count=1";
+
+    fetch(fullUri)
+        .then(res => res.json())
+        .then(data =>
+        {
+            console.log(data);
+
+            let img = data.cards[0].image;
+            const cardImg = document.getElementById("cardImg");
+
+            cardImg.src = img;
+            cardImg.style.display = "block";
 
         }
         )
